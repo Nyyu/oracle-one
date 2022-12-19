@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge</title>
+</head>
+<body>
+    <h1>Encryption</h1>
+
+    <p>Encrypt <input type="checkbox" id="switch" checked /> decrypt </p>
+    <input type="text" id="entry" class="input input-primary">
+    <br />
+    <span id="output">
+        Text goes here
+    </span>
+    
+    <script>
+        // no magic numbers
+        const STRING_SEPARATOR = ""
+        const LETTER_INDEX_FROM_WORDVARIATION_ARRAY = (word) => wordVariantion.indexOf(word)
+        const LETTER_INDEX_FROM_WORDTOCHANGE_ARRAY = (letter) => wordToChange.indexOf(letter)
+
+        /**
+         * Letter "e" -> "enter"
+         * Letter "i" -> "imes"
+         * Letter "a" -> "ai"
+         * Letter "o" -> "ober"
+         * Letter "u" -> "ufat"
+         */
+
+        // Follwing the same sequence shown /\
+        const wordToChange = ["e", "i", "a", "o", "u"]
+        const wordVariantion = ["enter", "imes", "ai", "ober", "ufat"]
+        
+        const entryInput = document.querySelector("input#entry")
+        const outputSpan = document.querySelector("span#output")
+        const switchInput = document.querySelector("#switch")
+
+        const encrypt = (value) => {
+            // Split the entire value/string into letters
+            const splittedWords = value.split("")
+            const encryptedLetters = splittedWords.map(letter => {
+                let encryptedLetter = letter;
+                
+                if(wordToChange.includes(letter)) {
+                    const letterIndex = LETTER_INDEX_FROM_WORDTOCHANGE_ARRAY(letter)
+                    encryptedLetter = wordVariantion[letterIndex]
+                }
+
+                return encryptedLetter
+            })
+            
+            return encryptedLetters.join(STRING_SEPARATOR)
+        }
+
+        const decrypt = (value) => {
+            let decryptedValue = value
+            
+            wordVariantion.forEach(word => {
+                const wordIndex =  LETTER_INDEX_FROM_WORDVARIATION_ARRAY(word)
+                const wordRegex = new RegExp(`${word}`, "g");
+                
+                const replacementWord = wordToChange[wordIndex]
+                decryptedValue = decryptedValue.replace(wordRegex, replacementWord)
+            })
+
+            return decryptedValue
+        }
+
+        const handleChange = (event) => {
+            const { value } = event.target
+            const isItSupposedToEncrypt = switchInput.checked
+    
+            const outputText = isItSupposedToEncrypt ? encrypt(value) : decrypt(value)
+            outputSpan.innerText = outputText 
+            console.log(isItSupposedToEncrypt)
+        }
+
+        entryInput.addEventListener("input", handleChange)
+    </script>
+</body>
+</html>
