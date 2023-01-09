@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Challenge</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./styles/resetCss.css" />
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+
+  <body>
+    <header>
+      <img src="../public/alura-icon.svg" alt="alura icon" />
+    </header>
+    <main>
+      <div class="switch-group">
+        <input
+          id="entry"
+          type="text"
+          class="input input-primary"
+          placeholder="Insert your text"
+        />
+
+        <div for="switch" class="switch-body" aria-label="button options">
+          <input
+            id="enc-switch"
+            type="radio"
+            name="switch"
+            checked
+            class="switch input-hidden"
+            value="enc"
+          />
+          <label for="enc-switch" class="btn btn-primary">Encrypt</label>
+          <input
+            id="dec-switch"
+            type="radio"
+            name="switch"
+            class="switch input-hidden"
+            value="dec"
+          />
+          <label for="dec-switch" class="btn btn-secondary">Decrypt</label>
+        </div>
+      </div>
+    </main>
+    <aside>
+      <span id="output"> RESULT GOES HERE</span>
+    </aside>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
